@@ -25,6 +25,26 @@ const validateRegister = (req, res, next) => {
     next(); // Continue to controller
 };
 
+const validateLogin = (req, res, next) => {
+    const { email, password } = req.body;
+
+    if(!email || !email.includes('@') || !email.includes('.')){
+        return res.status(400).json({
+            success: false,
+            message: "Valid email is required to enter"
+        });
+    }
+
+    if(!password){
+        return res.status(400).json({
+            success: false,
+            message: "Please enter password"
+        });
+    }
+    next();
+};
+
 module.exports = {
-    validateRegister
+    validateRegister,
+    validateLogin
 };
