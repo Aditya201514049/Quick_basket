@@ -1,4 +1,4 @@
-const Product = require('../models/product.nodel');
+const Product = require('../models/product.model');
 
 const createProduct = async(productData) =>{
     const product = new Product(productData);
@@ -11,7 +11,7 @@ const getAllProducts = async() =>{
 };
 
 const getProductById = async(productId) =>{
-    const product = new Product.findById(productId);
+    const product = await Product.findById(productId).populate('seller');
     if(!product){
         throw new Error('Product not found');
     }
