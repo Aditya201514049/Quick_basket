@@ -2,7 +2,7 @@ const User = require('../models/user.model');
 const bcrypt = require('bcryptjs');
 
 const registerUser = async(userData) =>{
-    const {name, email, password} = userData;
+    const {name, email, password, role} = userData;
 
     //user already available or not
     const existingUser = await User.findOne({ email });
@@ -19,7 +19,8 @@ const registerUser = async(userData) =>{
     const newUser = new User({
         name,
         email,
-        password: hashedPassword
+        password: hashedPassword,
+        role
     });
 
     await newUser.save();
